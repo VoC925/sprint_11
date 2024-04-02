@@ -16,6 +16,7 @@ var (
 	randSource = rand.NewSource(time.Now().UnixNano())
 	// randRange использует randSource для генерации случайных чисел
 	randRange = rand.New(randSource)
+	pathToDB  = "tracker_test.db"
 )
 
 // getTestParcel возвращает тестовую посылку
@@ -31,7 +32,7 @@ func getTestParcel() Parcel {
 // TestAddGetDelete проверяет добавление, получение и удаление посылку
 func TestAddGetDelete(t *testing.T) {
 	// prepare
-	db, err := sql.Open("sqlite", "tracker.db")
+	db, err := sql.Open("sqlite", pathToDB)
 	if err != nil {
 		require.NoError(t, err)
 	}
@@ -61,7 +62,7 @@ func TestAddGetDelete(t *testing.T) {
 // TestSetAddress проверяет обновление адреса
 func TestSetAddress(t *testing.T) {
 	// prepare
-	db, err := sql.Open("sqlite", "tracker.db")
+	db, err := sql.Open("sqlite", pathToDB)
 	if err != nil {
 		require.NoError(t, err)
 	}
@@ -91,7 +92,7 @@ func TestSetAddress(t *testing.T) {
 // TestSetStatus проверяет обновление статуса
 func TestSetStatus(t *testing.T) {
 	// prepare
-	db, err := sql.Open("sqlite", "tracker.db")
+	db, err := sql.Open("sqlite", pathToDB)
 	if err != nil {
 		require.NoError(t, err)
 	}
@@ -120,7 +121,7 @@ func TestSetStatus(t *testing.T) {
 // TestGetByClient проверяет получение посылок по идентификатору клиента
 func TestGetByClient(t *testing.T) {
 	// prepare
-	db, err := sql.Open("sqlite", "tracker.db")
+	db, err := sql.Open("sqlite", pathToDB)
 	if err != nil {
 		require.NoError(t, err)
 	}

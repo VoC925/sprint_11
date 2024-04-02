@@ -2,12 +2,10 @@
 FROM golang:1.21.5 AS builder
 # рабочая директория
 WORKDIR /usr/src
-# копирование зависимостей в рабочую директорию
-COPY go.mod go.sum ./
-# подгрузка зависимостей
-RUN go mod download
-# копирование кода в рабочую директорию
+# копирование всех файлов и каталогов
 COPY . .
+# подгрузка зависимостей
+RUN go mod tidy
 # переменные окружения
 ENV CGO_ENABLED 0
 ENV GOOS linux
