@@ -14,23 +14,10 @@ jobs:
       - uses: actions/setup-go@v4
       - name: Build
         run: go build -v ./...
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
       - name: Test
         run: go test -v ./...
-
-  lint:
-    needs: [build, test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
-      - uses: golangci/golangci-lint-action@v3 
+      - name: Linter
+        uses: golangci/golangci-lint-action@v3
 
 #CD
   deploy:
